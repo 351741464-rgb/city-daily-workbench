@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head><script type="module">
+
+</script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/city-daily-workbench/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script>
+      (function () {
+        function showBootError(message, source, lineno, colno, error) {
+          var box = document.createElement('div');
+          box.style.cssText = 'padding:16px;margin:16px;border-radius:16px;background:#fff1f2;color:#111827;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;white-space:pre-wrap;line-height:1.5;box-shadow:0 8px 24px rgba(0,0,0,.08)';
+          box.innerText = '工作台启动异常，请把这段信息发给钱楠/二虾排查：\n\n' + String(message || '') + '\n' + String(source || '') + ':' + String(lineno || '') + ':' + String(colno || '') + '\n' + String(error && (error.stack || error.message) || '');
+          document.body.innerHTML = '';
+          document.body.appendChild(box);
+        }
+        window.addEventListener('error', function (event) { showBootError(event.message, event.filename, event.lineno, event.colno, event.error); });
+        window.addEventListener('unhandledrejection', function (event) { showBootError('Promise rejection', location.href, '', '', event.reason); });
+        if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+          navigator.serviceWorker.getRegistrations().then(function (registrations) {
+            registrations.forEach(function (registration) { registration.unregister(); });
+          }).catch(function () {});
+        }
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <title>城市每日管理工作台V1.0</title>
+    <script type="module" crossorigin src="/city-daily-workbench/assets/index-CwhUrUSV.js"></script>
+    <link rel="stylesheet" crossorigin href="/city-daily-workbench/assets/index-D4TD45o4.css">
+  </head>
+  <body>
+    <div id="boot-status" style="padding:16px;margin:16px;border-radius:16px;background:#eef2ff;color:#1e293b;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;line-height:1.5;box-shadow:0 8px 24px rgba(0,0,0,.08)">
+      工作台启动中…如果这个提示长期不消失，请把当前页面截图发给钱楠/二虾排查。
+    </div>
+    <script>
+      setTimeout(function () {
+        var boot = document.getElementById('boot-status');
+        var root = document.getElementById('root');
+        if (boot && (!root || !root.innerHTML.trim())) {
+          boot.innerText = '工作台启动超时：前端 JS 可能没有执行，或数据分片加载卡住。请把这段提示截图发给钱楠/二虾排查。\n当前地址：' + location.href;
+        }
+      }, 8000);
+    </script>
+    <div id="root"></div>
+  </body>
+</html>

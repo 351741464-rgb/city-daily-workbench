@@ -1,0 +1,4 @@
+/app_data.json /404.html 404!
+/data/master_c5b30f18af4ef28d.json /404.html 404!
+/data/master_*.json /404.html 404!
+/* /index.html 200
